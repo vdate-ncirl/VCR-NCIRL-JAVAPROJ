@@ -10,7 +10,8 @@ public class HumanPlayer extends Player {
 	public Play Play() {
 		Random rand = new Random();
 		int play= rand.nextInt(10) + 1;
-		Play p = new Play(this, play );
+		Play p = new Play(play);
+		AddPlayHistory(p);
 		return p;
 	}
 }

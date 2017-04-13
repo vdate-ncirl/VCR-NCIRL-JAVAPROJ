@@ -28,6 +28,11 @@ public abstract class Player {
 		playHistory.add(p);
 	}
 	
+	public Play getLastPLay () {
+		int last = playHistory.size() -1;
+		return playHistory.get(last);
+	}
+	
 	//public int getTotalpoints() {
 	//	int total = 0;
 	//	
