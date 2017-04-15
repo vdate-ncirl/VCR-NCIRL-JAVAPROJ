@@ -18,7 +18,6 @@ public class MorraApp {
 		h = new HumanPlayer("Gamer");
 		v = new VirtualPlayer("Computer");
 		GameHistory = new ArrayList<Game[]>();
-		//r = new Refree();
 	}
 	
 	public void init() {
