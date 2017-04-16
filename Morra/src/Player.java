@@ -3,6 +3,8 @@ public abstract class Player {
 	private String playerName;
 	private int playAsType;
 	private ArrayList<Play> playHistory = new ArrayList<Play>();
+	//private ArrayList<Score> sscoreHistory = new ArrayList<Score>();
+	private int totalScore;
 	
 	public Player (String playerName) {
 	this.playerName = playerName;
@@ -28,19 +30,18 @@ public abstract class Player {
 		playHistory.add(p);
 	}
 	
+	//public void AddPlayScore (Score s) {
+	//	sscoreHistory.add(s);
+	//}
+	
 	public Play getLastPLay () {
 		int last = playHistory.size() -1;
 		return playHistory.get(last);
 	}
 	
-	//public int getTotalpoints() {
-	//	int total = 0;
-	//	
-	//	for (int i = 0 ; i< playHistory.size() ; i++) {
-	//		total += playHistory.get(i).getPoints();
-	//	}
-	//	return total;
-	//}
+	public int gettotalScore() {
+		return totalScore;
+	}
 	
 	abstract Play Play();
 }

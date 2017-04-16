@@ -15,8 +15,8 @@ public class MorraApp {
 	 */
 	
 	public MorraApp() {
-		h = new HumanPlayer("Gamer");
-		v = new VirtualPlayer("Computer");
+		h = new HumanPlayer("me");
+		v = new VirtualPlayer("mac");
 		GameHistory = new ArrayList<Game[]>();
 	}
 	
@@ -30,19 +30,54 @@ public class MorraApp {
 		v.setPlayAsType(v_playAsType);
 		System.out.println("Player " + " : " + h.getPlayerName() + " : " +  "Choosen Playtype "  + " : " + h.getPlayAsType());
 		System.out.println("Player " + " : " + v.getPlayerName() + " : " +  "Choosen Playtype "  + " : " + v.getPlayAsType());
+		sc.close(); //This is just a eclipse thingy kept on giving warning sc not closed :)
 	}
 	
+	public void RunApp() {
+		  Game [] g =  {new Game(h), new Game(v)}; // Game of Game object for each player.
+		  for (int i = 0  ; i < g.length ; i++) 
+				g[i].Play();
+		  
+		  ComputeGameResults(g);
+		  GameHistory.add(g);
+	}
+
+	private void ComputeGameResults (Game[] g){
+		for (int i = 0 ; i < g.length ; i++) {
+			  Game [] tmpGameArray = g;
+			  for ( int j = 0 ; j < tmpGameArray.length ; j++) {
+				  if (tmpGameArray[j] != g[i]) {
+					  g[i].ComputeScore(tmpGameArray[j].getPlayer());
+				  }
+			  }
+		  }
+	}
 	
-	
-		public void RunApp() {
-			Game g [] = new Game[2];
-			
-			h.Play();
-			v.Play();
-			
-			g[0] = new Game(h, v);
-			g[1] = new Game(v,h);
-			
-			GameHistory.add(g);
+	public int totalScore(Player p){
+		int TotalScore = 0;
+		for (int i = 0 ; i <GameHistory.size() ; i++) {
+			  Game [] g = GameHistory.get(i);
+			  for ( int j = 0 ; j < g.length; j++) {
+				  if (g[j].getPlayer() == p) {
+					  
+					  TotalScore += g[j].getScore();
+				  }
+			  }
 		}
+		return TotalScore;
+	}
+	
+	public void DisplayResults() {
+		System.out.println("\nPlayer\tPlay\tscore\tPlayer\tPlay\tscore");
+		
+		for (int i = 0 ; i < GameHistory.size() ; i++) {
+			Game [] g = GameHistory.get(i);
+			for (int j = 0  ; j < g.length ; j++) {
+				System.out.print(g[j].getPlayer().getPlayerName()  +"\t" + g[j].getPlay().getplay() +"\t" + g[j].getScore() +"\t");
+			}
+			System.out.println();
+		}
+	System.out.println("Total Score for " + h.getPlayerName() + " " + totalScore(h));
+	System.out.println("Total Score for " + v.getPlayerName() + " " + totalScore(v));
+	}
 }
