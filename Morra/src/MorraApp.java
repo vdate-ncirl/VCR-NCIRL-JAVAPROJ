@@ -7,10 +7,10 @@ public class MorraApp {
 	 * each of column represents Game object for each of players.
 	 * The Game object itself references to player , player play(i.e count picked up by player),  and points scored for that round. 
 	 * 
-	 * For simplification let just consig=der game object represents the points scored by player
+	 * For simplification let just consider game object represents the points scored by player
 	 * For Our purposes  score of Gamer is in column-0 and Computer score are in column-1
 	 * Each row represents round of play 
-	 * So [0] 1 2 = round[0] Gamer scored 1 point and Computer scored 
+	 * So [0] 1 2 = round[0] Gamer scored 1 point and Computer scored 2
 	 *    [1] 2 1 = round[1] Gamer scored 2 and Computer 1
 	 */
 	

@@ -12,9 +12,9 @@ public class Morra_2 {
         int p1; //p1=1 -> player is ODDS, p1=2 -> player is EVENS
         int ppoints = 0, cpoints = 0; //Points bookkeeping per game
         int allfingers = 0, pfingers = 0; //Total number of fingers and my fingers
-        ArrayList<Integer> compobj = new ArrayList<>();
-        ArrayList<Integer> plrobj = new ArrayList<>();
-        int cont = 1, numberofgames = 1;
+        ArrayList<String> compobj = new ArrayList<>();
+        ArrayList<String> plrobj = new ArrayList<>();
+        int cont = 1, numberofgames = 1;//COnt is for continue playing, numberofgames.. well, guess...
         int compwin = 0, complose = 0, pwin = 0, plose = 0, draw = 0; //Scorekeeping for match
         int p_odd = 0, p_evens = 0;//How many odds/evens
 
@@ -49,9 +49,17 @@ public class Morra_2 {
                 /*Generate a random number 0-10, this will be the computer's fingers */
                 int cfingers = Morraapp.compfingers();
 
-                /* Insert the random numbers in an array for later viewing */
-                compobj.add(cfingers);
-                plrobj.add(pfingers);
+                /* Insert the numbers of fingers in an arraylist for later viewing.
+                Copy the value of fingers to another Int, then:
+                Convert the Int to String - why? 
+                Because I'm adding text to the Arraylist as well 
+                 */
+                int cfingg = cfingers;
+                int pfingg = pfingers;
+                String strcfing = Integer.toString(cfingg);
+                String strpfing = Integer.toString(pfingg);
+                compobj.add(strcfing);
+                plrobj.add(strpfing);
 
                 System.out.println("Computer is showing " + cfingers + " fingers.");
                 allfingers = cfingers + pfingers;
@@ -89,21 +97,35 @@ public class Morra_2 {
                 complose = complose + 1;
             } else if (ppoints == cpoints) {
                 System.out.println("It's a draw!");
-                draw = draw + 1;
+                draw = draw + 1; //Number of draws for the scorekeeping
             } else {
-                System.out.print("Computer won. ");
+                System.out.println("Computer won. ");
                 compwin = compwin + 1;
                 plose = plose + 1;
+
             }
 
-            /* Game over, let's display the played numbers */
-            System.out.println("Computer played: " + compobj);
+            /* Game over, let's display the played numbers 
+            I've left in the original version as commented just as an example
+             */
+//            System.out.println("Computer played: " + compobj);
+            compobj.add("<- Game " + numberofgames);
+            System.out.println("Computer played:");
+            for (int zz = 0; zz < compobj.size(); zz++) {
+                System.out.print(compobj.get(zz) + "\t");
+            }
 
-            System.out.println("You played: " + plrobj);
+//            System.out.println("You played: " + plrobj);
+            plrobj.add("<- Game " + numberofgames);
+            System.out.println("\nYou played:");
+            for (int zx = 0; zx < plrobj.size(); zx++) {
+                System.out.print(plrobj.get(zx) + "\t");
+            }
             int aa = 0;
+
             /* Play again? If unknown input -> loop the question */
             while (aa == 0) {
-                System.out.println("Play again? [y/n]");
+                System.out.println("\nPlay again? [y/n]");
                 String response = sc.next();
 
                 switch (response) {
@@ -125,6 +147,7 @@ public class Morra_2 {
                 }
             }
         }
+        /* Game over, let's have some results */
         System.out.println("Thank you for playing!");
         System.out.println("You played " + numberofgames + " games.");
         System.out.println("Your wins: " + pwin + " your losses: " + plose);
